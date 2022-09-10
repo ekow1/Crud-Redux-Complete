@@ -3,17 +3,22 @@ import { useState } from 'react';
 import EditUserForm from './EditUserForm';
 import {  Col } from 'react-bootstrap';
 import 'boxicons/css/boxicons.min.css';
+import {  useDispatch } from "react-redux";
+import { RemoveUser } from "./actions/userActions";
 
 function User( {userInfo, updateUser, deleteUser} ) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const dispatch = useDispatch();
   
 
   const handleDelete = () => {
-    deleteUser(userInfo.id);
+    // deleteUser(userInfo.id);
 
-    delete userInfo.id;
+    // delete userInfo.id;
+
+    dispatch(RemoveUser(userInfo.id));
   
   }
 

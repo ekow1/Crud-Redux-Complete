@@ -3,21 +3,26 @@ import { useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import '../App.css';
+import { addUser } from './actions/userActions';
+import { useDispatch } from 'react-redux';
+import { v4 as uuid } from "uuid";
 function AddUser(props) {
   const [name , setName] = useState('');
   const [contact , setContact] = useState('');
   const [location , setLocation] = useState('');
+  const dispatch  = useDispatch();
  
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.newUser({ name ,  contact , location});
+    // props.newUser({ name ,  contact , location});
+    let userInfo = { id : uuid , name ,contact , location };
     setName('');
     setContact('');
     setLocation('');
 
-  
-    console.log(name , contact , location );
+    dispatch(addUser(userInfo))
+    // console.log(name , contact , location );
   }
 
    

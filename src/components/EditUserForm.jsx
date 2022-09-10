@@ -2,16 +2,24 @@ import React from 'react'
 import { useState } from 'react'
 import {Form , Button  }from 'react-bootstrap';
 import 'boxicons/css/boxicons.min.css';
+import { useDispatch } from "react-redux";
+import {updateUser} from './actions/userActions'
 
 function EditUserForm(props) {
     const [name , setName] = useState( props.userInfo.name);
     const [contact , setContact] = useState( props.userInfo.contact);
     const [location , setLocation] = useState( props.userInfo.location);
     const [id , setId] = useState( props.userInfo.id);
+    const dispatch = useDispatch()
 
 const handleSubmit = (e) => {
     e.preventDefault();
-    props.updateUser( id ,{name , contact ,  location ,});
+    // props.updateUser( id ,{name , contact ,  location ,});
+
+    let userInfo = {id : props.userInfo.id, name , contact , location}
+
+    dispatch(updateUser(userInfo))
+
     setName('');
     setContact('');
     setLocation('');
